@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartUrban - Cidades e Comunidades Sustentáveis</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NOTIFICAÇÕES
+  ═══════════════════════════════════════════ -->
+  <div id="notification-container" aria-live="polite"></div>
+
+  <!-- ═══════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════ -->
+  <header id="header">
+    <div class="container header-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">Smart<strong>Urban</strong></span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#dashboard" class="nav-link">Dashboard</a>
+        <a href="#cadastro" class="nav-link">Registrar</a>
+        <a href="#ocorrencias" class="nav-link">Ocorrências</a>
+        <a href="#iniciativas" class="nav-link">Iniciativas</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Cidades e Comunidades Sustentáveis
+      </div>
+      <h1 class="hero-title">
+        Transforme sua cidade<br />
+        <span class="hero-title-accent">em um lugar melhor</span>
+      </h1>
+      <p class="hero-desc">
+        A SmartUrban conecta cidadãos ao poder da mudança. Registre problemas urbanos,
+        acompanhe resoluções em tempo real e participe de iniciativas que tornam a cidade
+        mais inteligente, limpa e sustentável.
+      </p>
+      <div class="hero-actions">
+        <a href="#cadastro" class="btn btn-primary">Registrar Ocorrência</a>
+        <a href="#dashboard" class="btn btn-ghost">Ver Dashboard</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-number" id="heroTotal">0</span>
+          <span class="hero-stat-label">Ocorrências</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-number" id="heroResolvidas">0</span>
+          <span class="hero-stat-label">Resolvidas</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-number" id="heroCidadaos">0</span>
+          <span class="hero-stat-label">Cidadãos ativos</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-circle c1"></div>
+      <div class="hero-circle c2"></div>
+      <div class="hero-circle c3"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       DASHBOARD
+  ═══════════════════════════════════════════ -->
+  <section id="dashboard" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag blue">Dashboard</div>
+        <h2 class="section-title">Painel de Controle</h2>
+        <p class="section-sub">Acompanhe em tempo real o status das ocorrências urbanas registradas pela comunidade.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon">◎</div>
+          <div class="stat-info">
+            <span class="stat-label">Total de Ocorrências</span>
+            <span class="stat-number" id="statTotal">0</span>
+          </div>
+          <div class="stat-trend" id="trendTotal">—</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon">✓</div>
+          <div class="stat-info">
+            <span class="stat-label">Resolvidas</span>
+            <span class="stat-number" id="statResolvidas">0</span>
+          </div>
+          <div class="stat-trend" id="trendResolvidas">—</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-icon">◷</div>
+          <div class="stat-info">
+            <span class="stat-label">Pendentes</span>
+            <span class="stat-number" id="statPendentes">0</span>
+          </div>
+          <div class="stat-trend" id="trendPendentes">—</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon">◉</div>
+          <div class="stat-info">
+            <span class="stat-label">Cidadãos Participantes</span>
+            <span class="stat-number" id="statCidadaos">0</span>
+          </div>
+          <div class="stat-trend">Comunidade ativa</div>
+        </div>
+      </div>
+
+      <!-- Gráfico Canvas -->
+      <div class="chart-wrapper">
+        <div class="chart-header">
+          <h3 class="chart-title">Visão Geral — Resolvidas x Pendentes</h3>
+          <div class="chart-legend">
+            <span class="legend-dot green"></span> Resolvidas
+            <span class="legend-dot orange" style="margin-left:16px"></span> Pendentes
+          </div>
+        </div>
+        <canvas id="graficoOcorrencias" width="900" height="220" aria-label="Gráfico de ocorrências"></canvas>
+        <p class="chart-empty" id="chartEmpty">Nenhuma ocorrência registrada ainda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CADASTRO DE OCORRÊNCIA
+  ═══════════════════════════════════════════ -->
+  <section id="cadastro" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag green">Registrar</div>
+        <h2 class="section-title">Nova Ocorrência</h2>
+        <p class="section-sub">Relate um problema urbano. Sua participação é essencial para construir uma cidade melhor.</p>
+      </div>
+
+      <div class="form-card">
+        <form id="formOcorrencia" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inputNome">Nome do Cidadão</label>
+              <input type="text" id="inputNome" placeholder="Seu nome completo" autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputCategoria">Categoria</label>
+              <select id="inputCategoria">
+                <option value="">Selecione uma categoria</option>
+                <option value="Descarte Irregular de Lixo">🗑️ Descarte Irregular de Lixo</option>
+                <option value="Acúmulo de Resíduos">♻️ Acúmulo de Resíduos</option>
+                <option value="Falta de Coleta Seletiva">📦 Falta de Coleta Seletiva</option>
+                <option value="Iluminação Pública Defeituosa">💡 Iluminação Pública Defeituosa</option>
+                <option value="Vazamento de Água">💧 Vazamento de Água</option>
+                <option value="Necessidade de Arborização">🌳 Necessidade de Arborização</option>
+                <option value="Problema de Mobilidade Urbana">🚌 Problema de Mobilidade Urbana</option>
+                <option value="Outro">📋 Outro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="inputLocalizacao">Localização</label>
+              <input type="text" id="inputLocalizacao" placeholder="Ex: Rua das Flores, 123 — Bairro Centro" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputPrioridade">Prioridade</label>
+              <select id="inputPrioridade">
+                <option value="Baixa">🟢 Baixa</option>
+                <option value="Média" selected>🟡 Média</option>
+                <option value="Alta">🔴 Alta</option>
+                <option value="Urgente">🚨 Urgente</option>
+              </select>
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="inputDescricao">Descrição</label>
+              <textarea id="inputDescricao" rows="4" placeholder="Descreva o problema com detalhes: o que está acontecendo, desde quando, e qualquer informação relevante..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <span>Registrar Ocorrência</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <button type="button" class="btn btn-ghost" id="btnLimpar">Limpar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       LISTA DE OCORRÊNCIAS
+  ═══════════════════════════════════════════ -->
+  <section id="ocorrencias" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag blue">Registros</div>
+        <h2 class="section-title">Ocorrências</h2>
+        <p class="section-sub">Gerencie todas as ocorrências registradas pela comunidade.</p>
+      </div>
+
+      <!-- Barra de filtros -->
+      <div class="filters-bar">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input type="text" id="inputBusca" placeholder="Buscar por nome, localização, categoria..." />
+        </div>
+        <div class="filter-group">
+          <select id="filtroCategoria">
+            <option value="">Todas as categorias</option>
+            <option value="Descarte Irregular de Lixo">Descarte Irregular</option>
+            <option value="Acúmulo de Resíduos">Acúmulo de Resíduos</option>
+            <option value="Falta de Coleta Seletiva">Coleta Seletiva</option>
+            <option value="Iluminação Pública Defeituosa">Iluminação</option>
+            <option value="Vazamento de Água">Vazamento de Água</option>
+            <option value="Necessidade de Arborização">Arborização</option>
+            <option value="Problema de Mobilidade Urbana">Mobilidade</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <select id="filtroStatus">
+            <option value="">Todos os status</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Resolvida">Resolvida</option>
+          </select>
+          <button class="btn btn-outline btn-sm" id="btnExportar">⬇ Exportar JSON</button>
+        </div>
+      </div>
+
+      <!-- Resultado dos filtros -->
+      <div class="filter-result" id="filterResult"></div>
+
+      <!-- Lista -->
+      <div id="listaOcorrencias" class="ocorrencias-grid">
+        <!-- Cards injetados via JS -->
+      </div>
+
+      <!-- Estado vazio -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">◈</div>
+        <h3>Nenhuma ocorrência encontrada</h3>
+        <p>Seja o primeiro a registrar uma ocorrência ou ajuste os filtros acima.</p>
+        <a href="#cadastro" class="btn btn-primary">Registrar agora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       INICIATIVAS SUSTENTÁVEIS
+  ═══════════════════════════════════════════ -->
+  <section id="iniciativas" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag green">Ações</div>
+        <h2 class="section-title">Iniciativas Sustentáveis</h2>
+        <p class="section-sub">A plataforma não apenas registra problemas — ela promove ações reais para uma cidade mais sustentável.</p>
+      </div>
+
+      <div class="iniciativas-grid">
+        <div class="iniciativa-card">
+          <div class="iniciativa-icon" style="background: #E8F5E9; color: #2E7D32">♻</div>
+          <h3>Coleta Seletiva</h3>
+          <p>Pontos de entrega voluntária distribuídos nos bairros, com separação de plástico, papel, vidro e metal. Parceria com cooperativas locais.</p>
+          <div class="iniciativa-tag">Em andamento</div>
+        </div>
+        <div class="iniciativa-card">
+          <div class="iniciativa-icon" style="background: #E8F5E9; color: #388E3C">🌳</div>
+          <h3>Plantio de Árvores</h3>
+          <p>Programa de arborização urbana com plantio de espécies nativas em calçadas, praças e parques. Meta: 1.000 mudas por trimestre.</p>
+          <div class="iniciativa-tag">Ativa</div>
+        </div>
+        <div class="iniciativa-card">
+          <div class="iniciativa-icon" style="background: #E3F2FD; color: #1565C0">🤝</div>
+          <h3>Mutirão de Limpeza</h3>
+          <p>Mobilização comunitária mensal para limpeza de áreas públicas. Cidadãos se cadastram e recebem kits com equipamentos de proteção.</p>
+          <div class="iniciativa-tag">Mensal</div>
+        </div>
+        <div class="iniciativa-card">
+          <div class="iniciativa-icon" style="background: #FFF8E1; color: #F57F17">📢</div>
+          <h3>Campanhas de Reciclagem</h3>
+          <p>Educação ambiental em escolas e empresas sobre descarte correto e ciclo de vida dos materiais. Reduzir e reutilizar antes de reciclar.</p>
+          <div class="iniciativa-tag">Trimestral</div>
+        </div>
+        <div class="iniciativa-card">
+          <div class="iniciativa-icon" style="background: #F3E5F5; color: #6A1B9A">🚲</div>
+          <h3>Mobilidade Sustentável</h3>
+          <p>Incentivo ao uso de bicicletas e transporte público. Criação de ciclovias e bicicletários em pontos estratégicos da cidade.</p>
+          <div class="iniciativa-tag">Planejada</div>
+        </div>
+        <div class="iniciativa-card">
+          <div class="iniciativa-icon" style="background: #E0F7FA; color: #006064">💧</div>
+          <h3>Uso Consciente da Água</h3>
+          <p>Captação de água da chuva em edifícios públicos e jardins comunitários. Redução de 30% no consumo hídrico das áreas verdes municipais.</p>
+          <div class="iniciativa-tag">Ativa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       DICAS SUSTENTÁVEIS
+  ═══════════════════════════════════════════ -->
+  <section id="dicas" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag green">Dicas</div>
+        <h2 class="section-title">Cidadão Consciente</h2>
+        <p class="section-sub">Pequenas ações do dia a dia que fazem grande diferença para o planeta e para a nossa cidade.</p>
+      </div>
+
+      <div class="dicas-grid">
+        <div class="dica-card">
+          <div class="dica-number">01</div>
+          <div class="dica-content">
+            <h4>Separação de Resíduos</h4>
+            <ul>
+              <li>Separe recicláveis (plástico, papel, vidro, metal) do lixo orgânico</li>
+              <li>Limpe as embalagens antes de descartar</li>
+              <li>Utilize o ecoponto mais próximo para materiais especiais</li>
+            </ul>
+          </div>
+          <div class="dica-emoji">♻️</div>
+        </div>
+        <div class="dica-card">
+          <div class="dica-number">02</div>
+          <div class="dica-content">
+            <h4>Economia de Água</h4>
+            <ul>
+              <li>Feche a torneira ao escovar os dentes — economize 12L por vez</li>
+              <li>Use regador em vez de mangueira no jardim</li>
+              <li>Conserte vazamentos imediatamente</li>
+            </ul>
+          </div>
+          <div class="dica-emoji">💧</div>
+        </div>
+        <div class="dica-card">
+          <div class="dica-number">03</div>
+          <div class="dica-content">
+            <h4>Economia de Energia</h4>
+            <ul>
+              <li>Troque lâmpadas por LED — 80% mais eficientes</li>
+              <li>Desligue aparelhos do modo standby</li>
+              <li>Aproveite a luz natural durante o dia</li>
+            </ul>
+          </div>
+          <div class="dica-emoji">⚡</div>
+        </div>
+        <div class="dica-card">
+          <div class="dica-number">04</div>
+          <div class="dica-content">
+            <h4>Transporte Consciente</h4>
+            <ul>
+              <li>Prefira transporte público, bicicleta ou caminhada</li>
+              <li>Faça caronas solidárias com vizinhos ou colegas</li>
+              <li>Planeje rotas para reduzir deslocamentos</li>
+            </ul>
+          </div>
+          <div class="dica-emoji">🚌</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SOBRE O PROJETO
+  ═══════════════════════════════════════════ -->
+  <section id="sobre" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag blue">Missão</div>
+        <h2 class="section-title">Sobre o SmartUrban</h2>
+      </div>
+
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <p class="sobre-lead">
+            O SmartUrban nasceu do compromisso com o <strong>ODS 11</strong> da Agenda 2030 da ONU:
+            tornar as cidades inclusivas, seguras, resilientes e sustentáveis.
+          </p>
+          <p>
+            A plataforma funciona como uma ponte entre o cidadão e a gestão urbana. Qualquer
+            pessoa pode registrar um problema, seja um descarte irregular, uma lâmpada queimada
+            ou uma rua sem arborização e acompanhar o status da resolução em tempo real.
+          </p>
+          <p>
+            Mais do que um canal de denúncias, o SmartUrban é um espaço de participação cidadã
+            ativa. Acreditamos que cidades melhores são construídas por pessoas engajadas,
+            e que a tecnologia deve servir como ferramenta de transformação social.
+          </p>
+          <div class="sobre-badges">
+            <span class="sobre-badge green">ODS 11 — Cidades Sustentáveis</span>
+            <span class="sobre-badge blue">Participação Cidadã</span>
+            <span class="sobre-badge green">Gestão Urbana Inteligente</span>
+          </div>
+        </div>
+        <div class="ods-card">
+          <div class="ods-number">11</div>
+          <div class="ods-title">Cidades e Comunidades Sustentáveis</div>
+          <div class="ods-metas">
+            <div class="ods-meta">
+              <span class="ods-meta-icon">🏙️</span>
+              <span>11.6 — Reduzir o impacto ambiental negativo per capita das cidades</span>
+            </div>
+            <div class="ods-meta">
+              <span class="ods-meta-icon">🌿</span>
+              <span>11.7 — Proporcionar acesso universal a espaços públicos seguros e verdes</span>
+            </div>
+            <div class="ods-meta">
+              <span class="ods-meta-icon">📊</span>
+              <span>11.b — Aumentar o número de cidades com políticas de resiliência urbana</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">Smart<strong>Urban</strong></span>
+      </div>
+      <p class="footer-copy">SmartUrban © 2025 — Alinhado ao ODS 11 da Agenda 2030</p>
+      <div class="footer-ods">
+        <span>🌍 ODS 11</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
