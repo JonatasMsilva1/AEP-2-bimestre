@@ -208,7 +208,7 @@ button, select, input, textarea {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: .6; transform: scale(1.3); }
 }
-.hero-title {
+.hero-title{
   font-family: var(--font-head);
   font-size: clamp(2.4rem, 5vw, 3.8rem);
   font-weight: 800;
@@ -220,6 +220,7 @@ button, select, input, textarea {
 .hero-title-accent {
   color: var(--green-main);
   position: relative;
+  font-size: 55px;
 }
 .hero-title-accent::after {
   content: '';
@@ -889,6 +890,7 @@ button, select, input, textarea {
   text-align: justify;
 }
 .sobre-text p {
+  text-align: justify;
   color: var(--text-2);
   line-height: 1.75;
   margin-bottom: 14px;
