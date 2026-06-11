@@ -1,7 +1,7 @@
 # Smart Urban
 
 **Acesse o sistema:**  
-### https://SEU-USUARIO.github.io/ProjetoSmartUrban/
+### https://jonatasmsilva1.github.io/AEP-2-bimestre/
 
 ---
 
