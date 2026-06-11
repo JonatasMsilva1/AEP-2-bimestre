@@ -24,10 +24,8 @@ O **Smart Urban** é um sistema desenvolvido como projeto da **AEP (Atividade de
 - JavaScript
 - Git e GitHub
 
-## Objetivo do Projeto
-
-O projeto busca demonstrar como a tecnologia pode contribuir para a construção de cidades mais inteligentes, promovendo maior participação da população e auxiliando na identificação e resolução de problemas urbanos.
-
 ## Equipe
 
-Projeto desenvolvido como atividade acadêmica para a disciplina de Engenharia de Software da Unicesumar.
+Jonatas Marques Da Silva
+Rafael Garcia Ribeiro
+Gustavo Antunes Da Silva
