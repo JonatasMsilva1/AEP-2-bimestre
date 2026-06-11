@@ -21,4 +21,4 @@ Equipe
 
 Projeto desenvolvido como atividade acadêmica para a disciplina de Engenharia de Software da Unicesumar.
 
-Acesso ao projeto: adicione aqui o link do GitHub Pages quando estiver disponível.
+Acesso ao projeto: https://jonatasmsilva1.github.io/AEP-2-bimestre/
