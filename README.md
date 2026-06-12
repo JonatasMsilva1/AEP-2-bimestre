@@ -5,6 +5,10 @@
 
 ---
 
+# Diagrama UML
+
+<img width="1168" height="1347" alt="DiagramaSmartUrban png" src="https://github.com/user-attachments/assets/3025189f-5802-442b-b911-dcc5eb5f9ee6" />
+
 ## Sobre o Projeto
 
 O **Smart Urban** é um sistema desenvolvido como projeto da **AEP (Atividade de Estudo Programada)** do curso de Engenharia de Software. O objetivo da aplicação é facilitar a comunicação entre os cidadãos e os órgãos responsáveis pela gestão urbana, permitindo o registro e acompanhamento de ocorrências relacionadas à cidade.
