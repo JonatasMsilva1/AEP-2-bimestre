@@ -31,5 +31,7 @@ O **Smart Urban** é um sistema desenvolvido como projeto da **AEP (Atividade de
 ## Equipe
 
 Jonatas Marques Da Silva
+
 Rafael Garcia Ribeiro
+
 Gustavo Antunes Da Silva
